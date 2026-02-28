@@ -1,0 +1,44 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/2/FullAdder.hdl
+/**
+ * Computes the sum of three bits.
+ */
+CHIP FullAdder {
+    IN a, b, c;  // 1-bit inputs
+    OUT sum,     // Right bit of a + b + c
+        carry;   // Left bit of a + b + c
+
+    PARTS:
+    Not(in=a , out=an );
+    Not(in=b , out=bn );
+    Not(in=c , out=cn );
+
+    And(a=an , b=bn ,out=a1 );
+    And(a=a1 , b=c ,out=A1 );
+    And(a=an , b=b ,out=a2 );
+    And(a=a2 , b=cn ,out=A2 );
+    And(a=a , b=bn ,out=a3 );
+    And(a=a3 , b=cn ,out=A3 );
+    And(a=a , b=b ,out=a4 );
+    And(a=a4 , b=c ,out=A4 );
+    Or(a=A1 , b=A2 , out=AA1 );
+    Or(a=A3 , b=A4 , out=AA2 );
+    Or(a=AA1 , b=AA2 , out=sum );
+
+    And(a=an , b=b ,out=c1 );
+    And(a=c1 , b=c ,out=C1 );
+    And(a=a , b=bn ,out=c2 );
+    And(a=c2 , b=c ,out=C2 );
+    And(a=a , b=b ,out=c3 );
+    And(a=c3 , b=cn ,out=C3 );
+    And(a=a , b=b ,out=c4 );
+    And(a=c4 , b=c ,out=C4 );
+    Or(a=C1 , b=C2 , out= CC1);
+    Or(a=C3 , b=C4 , out= CC2);
+    Or(a=CC1 , b=CC2 , out= carry);
+
+
+    //// Replace this comment with your code.
+}
